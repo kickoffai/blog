@@ -1,0 +1,31 @@
+# Site settings
+title: Kickoff.ai blog
+description: >-
+  Updates on the Kickoff.ai football prediction platform, sports analytics,
+  football visualizations and much more.
+baseurl: ""
+url: https://blog.kickoff.ai
+
+# Author
+author:
+  name: Kickoff.ai team
+  url: https://kickoff.ai
+  email: info@kickoff.ai
+
+# Build settings
+markdown: kramdown
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
+
+# Gems
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jemoji #Uncomment this to allow emoji in your post
+
+# Permalinks
+permalink:      /:year-:month-:day/:title
+paginate:       5
