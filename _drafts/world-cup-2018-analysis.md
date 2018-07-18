@@ -92,7 +92,7 @@ track of the ones we could easily obtain during the competition:
   inverse of the odd. This encodes the collective intelligence of what people
   think about the outcome of a match.
 - **Random predictor**. In order to check that models are not only randomly
-  predicting the outcomes of games, we compare to a random predictor that
+  predicting the outcomes of matches, we compare to a random predictor that
   assigns a probability of one third to a win, a tie, and a loss.
 
 In order to gain more insight on how the different models perform, we consider
@@ -143,7 +143,7 @@ six matches are not well calibrated.
 ![Knockout stage cumulative average log loss.](/assets/posts/wc18-analysis/ko-cumavg.png)
 _Knockout stage cumulative average log loss. Lower is better._
 
-In particular, we made a big mistake of the 58<sup>th</sup> game, Brazil versus
+In particular, we made a big mistake in the 58<sup>th</sup> match, Brazil versus
 Belgium. We predicted a Brazilian victory with 57% chances and Google with only
 46%. We also made a mistake on the third-place play-off, predicting England
 with 38% chances instead of Belgium.
