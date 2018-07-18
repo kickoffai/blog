@@ -99,7 +99,7 @@ the group stage (48 matches) and knockout stage (16 matches) separately.
 Moreover, FiveThirtyEight did not provide probabilities for the *tie* outcome
 during knockout phase, as done by Google, betting odds, and Kickoff.ai.
 
-![Group stage average log loss.](/assets/posts/grp-bar.png)
+![Group stage average log loss.](/assets/posts/wc18-analysis/grp-bar.png)
 _Group stage average log loss. Lower is better._
 
 As we can see in the above plots, Kickoff.ai’s average log loss (0.925) is
@@ -111,7 +111,7 @@ Let’s dig into more details about how the performances evolved over time. We
 hence plot the *cumulative* average log loss, i.e. the average log loss match
 after match.
 
-![Group stage cumulative average log loss.](/assets/posts/grp-cumavg.png)
+![Group stage cumulative average log loss.](/assets/posts/wc18-analysis/grp-cumavg.png)
 _Group stage cumulative average log loss. Lower is better._
 
 As we can see, Kickoff.ai’s model performs worse than competing approaches for
@@ -131,7 +131,7 @@ actually solely based on betting odds...
 The results for knockout stage are rather different. We show in the following
 figure the performances on the last 16 matches of the World Cup.
 
-![Knockout stage average log loss.](/assets/posts/ko-bar.png)
+![Knockout stage average log loss.](/assets/posts/wc18-analysis/ko-bar.png)
 _Knockout stage average log loss. Lower is better._
 
 Here, we see that Kickoff.ai performed much worse than Google and the betting
@@ -139,7 +139,7 @@ odds, with an average log loss of about 1.063 versus 0.978. And a glance at the
 cumulative average log loss shows that our predicted probabilities on the last
 six matches are not well calibrated.
 
-![Knockout stage cumulative average log loss.](/assets/posts/ko-cumavg.png)
+![Knockout stage cumulative average log loss.](/assets/posts/wc18-analysis/ko-cumavg.png)
 _Knockout stage cumulative average log loss. Lower is better._
 
 In particular, we made a big mistake of the 58<sup>th</sup> game, Brazil versus
@@ -159,7 +159,7 @@ trophy with the youngest team since Pelé 1970’s Brazil.
 All of this looks like a surprising World Cup. So we evaluated the performances
 of our model on previous editions. We show the results in the following figure.
 
-![Average log loss on previous competitions.](/assets/posts/previous.png)
+![Average log loss on previous competitions.](/assets/posts/wc18-analysis/previous.png)
 _Average log loss on other editions. Lower is better._
 
 As you can see, our model's performances during World Cup 2018's edition are
