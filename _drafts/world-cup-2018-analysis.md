@@ -9,54 +9,51 @@ Russia. For the [final match][final], Kickoff.ai gave 47% chances of winning to
 France, 25% chances to Croatia, and 21% chances of a draw after 90 minutes.  And
 this year, with the Croatian outsiders reaching the final after an epic journey,
 many surprises seem to have occurred.  We'll see however that, quantitatively,
-this World Cup has been easier to predict in comparison to other editions or
-other competitions. We provide in this article an evaluation of our model's
-performances and compare them to Google's, [FiveThirtyEight][538]'s, and betting
-odds' predictions.
+this World Cup has been easier to predict in comparison to other editions.
+We provide in this article an evaluation of our model's
+performance and compare it to Google's, [FiveThirtyEight][538]'s, and
+to predictions derived from betting odds.
 
 ## Behind the scenes
 
-Let us start by giving a few details about Kickoff.ai’s model. We model the
+Let us start by giving a few details about Kickoff.ai’s methodology. We model the
 probability of team A winning over team B or drawing as a function of the teams’
-*strengths*. These strengths are learned using over 100 years of national
-matches data. Indeed, football evolves very rapidly. Players come and go, their
-form varies from a day to another, and synergies within a squad is highly
-dependent on their personalities.  In order to take these aspects into account,
-we resort to two different strategies:
+*strengths*. These strengths are learned using over 100 years of matches
+between national teams. However, football evolves very rapidly. Players come and
+go, their form varies from a day to another, and synergies within a squad are
+highly dependent on the selected players. We take these aspects into account as
+follows:
 
 1. **We model team strength dynamically.** Our model allows the strength of
    a team to *change over time*.  This enables us to reflect that recent
    confrontations should be more important to predict upcoming matches. We call
    this dynamic strength the *Kickscore*.
 2. **We use Bayesian inference**. This is a fancy way of saying that we are able
-   to understand how *confident* we are about a particular prediction.  As an
-   example, take Argentina against Iceland. It is likely that Argentina will
-   win. On the one hand, Argentina is clearly the better team on paper, but on
-   the other hand Iceland has never taken part in a World Cup final tournament,
-   and might perform over its usual level.
+   to understand how *confident* we are about a particular prediction.
 
-Besides that, we also make two more assumptions that we incorporate into our
-model to boost or penalize a team's Kickscore:
+We also use two additional factors to boost or penalize a team's Kickscore,
+because we found them to be improving the predictive accuracy on past editions
+of the World Cup.
 
-1. **Home advantage.** We assume that teams playing in front of their crowd
-   usually perform better. Even though there is no such home advantage during
-   a competition such as the World Cup, it helps learning the Kickscores more
-   accurately using matches played at home (e.g., during qualification matches).
-2. **Competition advantage.** We assume that teams usually perform differently
-   during international competitions than there expected ability. As the World
-   Cup goes on, the model adapts this bonus (or malus) depending on how well (or
-   bad) teams actually perform.
+1. **Home advantage.** Teams playing in front of their crowd typically perform
+   better. Even though there is no such home advantage during a competition
+   such as the World Cup, it helps learning the Kickscores more accurately
+   using matches played at home (e.g., during qualification matches).
+2. **Competition advantage.** Teams sometimes perform differently during
+   international competitions than we would expect given their strength. As the
+   World Cup unfolds, the model learns this bonus (or malus) depending on how
+   well (or bad) teams actually perform during the competition.
 
 We also tried to model other aspects. We tried to add a *host advantage* to the
 team
 hosting the competition (i.e., Russia in 2018). We also tried to add a *crowd
-advantage*, i.e. a home advantage specific to each team. However, these
-assumptions appeared not to be useful to improve performances.
+advantage*, i.e., a home advantage specific to each team. However, these
+factors appeared were not helpful in increasing the predictive performance.
 
-All in all, our model is a combination of the Kickscore, home and competition
-advantages, and quantification of uncertainty in the data through Bayesian
-inference. We train the model again after each match to refine it taking into
-account recent results.
+In summary, our predictions come from a combination of the Kickscore, of home
+and competition advantages. The uncertainty in the data can be effectively
+quantified through the use of Bayesian inference. We retrain the model after
+every day to make sure that the most recent results are taken into account.
 
 ## How well did our model perform?
 
@@ -71,17 +68,21 @@ probability of this
 event to occur however is what gives all its sense to probabilistic modelling.
 
 A widely used evaluation metrics to take probabilities into account is the
-so-called *average logarithmic loss* (or average *log loss*). Informally, the
+so-called average *logarithmic loss* (or *log loss*). Informally, the
 log loss penalizes predictions that are both **confident** and **wrong**. It
 gives a number between 0 (the prediction was highly confidently correct) and
 infinity (the prediction was highly confidently wrong). Nonetheless, an issue
-with this metrics is its poor interpretability. What does it mean for a model to
-have an average log loss of, say, 1.315? Its usage however comes in handy when
-comparing models.
+with this metric is its poor interpretability. What does it mean for a model to
+achieve an average log loss of, say, 1.315? The log loss is only meaningful in
+comparison to other models.
 
 This year, many organisations provided forecasts prior to the World Cup. We kept
 track of the ones we could easily obtain during the competition:
-- **Google**. We don't have details about their methodology.
+
+- **Google**. When searching for a World Cup match on the Google search engine,
+  an infobox would display predicted outcome probabilities. Unfortunately we
+  don't have details about the methodology that was used to generate these
+  predictions.
 - **FiveThirtyEight**. Their methodology is [well detailed][538method].
   They take many different aspects of football matches into account, from
   attributing a score to each player to accounting for missed occasions during
@@ -116,11 +117,11 @@ _Group stage cumulative average log loss. Lower is better._
 
 As we can see, Kickoff.ai’s model performs worse than competing approaches for
 about 30 matches, but catches up in the end, outperforming Google and the
-betting odds. In particular, the 7<sup>th</sup> match–Peru versus Denmark–costed
+betting odds. In particular, the 7<sup>th</sup> match—Peru versus Denmark—costed
 us a lot. We were very confident that Peru would win (45%). Our model
-progressively reach back. First, with the 26<sup>th</sup> match–Serbia versus
-Switzerland–where we were confident in a Swiss win (47%). Then, with the
-32<sup>nd</sup> match–Uruguay versus Russia–where we correctly predicted
+progressively reached back. First, with the 26<sup>th</sup> match—Serbia versus
+Switzerland—where we were confident in a Swiss win (47%). Then, with the
+32<sup>nd</sup> match—Uruguay versus Russia—where we correctly predicted
 Uruguay's win with confidence (54%). On both matches, other models were more
 hesitating or wrong.
 
@@ -168,8 +169,7 @@ more surprises in 2010 and 2014 than this year.
 
 ## What’s next?
 
-All in all, given the simplicity of Kickoff.ai's model, we are happy with the
-results. The predictive performances are competitive with more complex
+The predictive performance of Kickoff.ai is competitive with more complex
 approaches. The competition bonus/malus per team helps to refine predictions
 over the course of the World Cup, even though the last matches proved to be
 difficult to predict. Besides, the Kickscores learned by the model provides
