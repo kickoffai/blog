@@ -131,7 +131,7 @@ It is also interesting to observe how closely Google performance follows the
 betting odds. So close that it is legitimate to ask whether their model is not
 actually solely based on betting odds...
 
-The results the for knockout stage are rather different. We show in the
+The results for the knockout stage are rather different. We show in the
 following figure the performances on the last 16 matches of the World Cup.
 
 ![Knockout stage average log loss.](/assets/posts/wc18-analysis/ko-bar.png)
@@ -185,7 +185,7 @@ Stay tuned by [subscribing to our mailing list!][mailchimp]!
 
 #### Prediction data
 
-[Download](data) the prediction data we used to evaluate the different models.
+[Download][data] the prediction data we used to evaluate the different models.
 
 #### Questions? Comments?
 
