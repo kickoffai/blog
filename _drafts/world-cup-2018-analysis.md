@@ -25,9 +25,10 @@ highly dependent on the selected players. We take these aspects into account as
 follows:
 
 1. **We model team strength dynamically.** Our model allows the strength of
-   a team to *change over time*.  This enables us to reflect that recent
-   confrontations should be more important to predict upcoming matches. We call
-   this dynamic strength the *Kickscore*.
+   a team to *change over time* (check out [France's page on
+   Kickoff.ai][kai-france] for an example).  This enables us to reflect that
+   recent confrontations should be more important to predict upcoming matches.
+   We call this dynamic strength the *Kickscore*.
 2. **We use Bayesian inference**. This is a fancy way of saying that we are able
    to understand how *confident* we are about a particular prediction.
 
@@ -36,75 +37,76 @@ because we found them to be improving the predictive accuracy on past editions
 of the World Cup.
 
 1. **Home advantage.** Teams playing in front of their crowd typically perform
-   better. Even though there is no such home advantage during a competition
-   such as the World Cup, it helps learning the Kickscores more accurately
-   using matches played at home (e.g., during qualification matches).
+   better. Even though there is no such home advantage during the World Cup, it
+   helps learning the Kickscores more accurately using matches played at home
+   (e.g., during qualification matches).
 2. **Competition advantage.** Teams sometimes perform differently during
    international competitions than we would expect given their strength. As the
-   World Cup unfolds, the model learns this bonus (or malus) depending on how
+   World Cup unfolds, our model learns this bonus (or malus) depending on how
    well (or bad) teams actually perform during the competition.
 
 We also tried to model other aspects. We tried to add a *host advantage* to the
-team
-hosting the competition (i.e., Russia in 2018). We also tried to add a *crowd
-advantage*, i.e., a home advantage specific to each team. However, these
-factors appeared were not helpful in increasing the predictive performance.
+team hosting the competition (i.e., Russia in 2018). We also tried to add a
+*crowd advantage*, i.e., a home advantage specific to each team. However, these
+factors were not helpful in increasing the predictive performance.
 
-In summary, our predictions come from a combination of the Kickscore, of home
-and competition advantages. The uncertainty in the data can be effectively
+In summary, our predictions come from a combination of the Kickscore and of the
+home and competition advantages. The uncertainty in the data can be effectively
 quantified through the use of Bayesian inference. We retrain the model after
 every day to make sure that the most recent results are taken into account.
 
 ## How well did our model perform?
 
-Now that the World Cup is over, we can evaluate how well our model performed. As
-it might be tempting to compute the *accuracy* of the model by reducing our
-probabilistic predictions to the three possible outcomes and simply predict the
-one with highest probability, we would actually lose meaningful information
-contained in these probabilities. Of course nobody would have predicted a German
-loss against South Korea. But just how much likely was this outcome? Was it 1%?
-Was it 5%? 20%? ([Our model says it was 10%.][korger]) Estimating the
-probability of this
-event to occur however is what gives all its sense to probabilistic modelling.
+Now that the World Cup is over, we can evaluate how well our model performed. 
+It might be tempting to compare the *accuracy* of models by
 
-A widely used evaluation metrics to take probabilities into account is the
-so-called average *logarithmic loss* (or *log loss*). Informally, the
-log loss penalizes predictions that are both **confident** and **wrong**. It
-gives a number between 0 (the prediction was highly confidently correct) and
-infinity (the prediction was highly confidently wrong). Nonetheless, an issue
-with this metric is its poor interpretability. What does it mean for a model to
-achieve an average log loss of, say, 1.315? The log loss is only meaningful in
-comparison to other models.
+1. reducing the outcome probabilities to a single, most-likely outcome, and
+2. check how many times the predicted outcome was correct.
+
+But this is rather crude, and loses a lot of meaningful information
+contained in these probabilities. Of course nobody could have reasonably predicted a German
+loss against South Korea. But just how much likely was this outcome? Was it 1%?
+Was it 5%? 20%? ([Our model says it was 10%.][korger]) In a higly uncertain
+sport such as football, getting accurate estimates of the *probability* of such
+events to occur is very important,
+
+Hence, we use a metric called [*logarithmic loss*][quora-logloss] (or *log loss*). Informally,
+the log loss penalizes predictions that are both **confident** and **wrong**.
+It gives a number between 0 (the prediction was highly confidently correct) and
+infinity (the prediction was highly confidently wrong), so: the smaller the log
+loss, the better. In other words, this metric rewards predictors which are "least
+surprised" by the observed outcome, on average. We acknowledge
+that it is difficult to interpret the log-loss in absolute terms. What does it
+mean for a model to achieve an average log loss of, say, 1.315? The log loss is
+only meaningful in comparison to other models.
 
 This year, many organisations provided forecasts prior to the World Cup. We kept
-track of the ones we could easily obtain during the competition:
+track of the following ones:
 
 - **Google**. When searching for a World Cup match on the Google search engine,
   an infobox would display predicted outcome probabilities. Unfortunately we
   don't have details about the methodology that was used to generate these
   predictions.
-- **FiveThirtyEight**. Their methodology is [well detailed][538method].
-  They take many different aspects of football matches into account, from
-  attributing a score to each player to accounting for missed occasions during
-  a match.
+- **FiveThirtyEight**, a popular American web site. Their methodology is [well
+  detailed][538method]. They have access to play-by-play data and can thus
+  build a much more complex model, e.g., by considering each player in the
+  lineup or by accounting for missed occasions during a match.
 - **Betting odds**. We average the betting odds from [many
-  bookmakers][betting-odds] and compute the predicted probabilities as the
-  inverse of the odd. This encodes the collective intelligence of what people
-  think about the outcome of a match.
-- **Random predictor**. In order to check that models are not only randomly
-  predicting the outcomes of matches, we compare to a random predictor that
-  assigns a probability of one third to a win, a tie, and a loss.
+  bookmakers][betting-odds] and compute probabilities by inverting the odds. In
+  a sense, the betting odds represent the collective intelligence of what
+  people think about the outcome of a match.
+- **Random predictor**. As a baseline, we also consider a "random" predictor
+  that assigns a probability of 33.3% to every outcome: win, tie and loss.
 
-In order to gain more insight on how the different models perform, we consider
-the group stage (48 matches) and knockout stage (16 matches) separately.
-Moreover, FiveThirtyEight did not provide probabilities for the *tie* outcome
-during knockout phase, as done by Google, betting odds, and Kickoff.ai.
+As FiveThirtyEight did not provide probabilities for the *tie* outcome during
+the knockout phase, we consider the group stage (48 matches) and knockout stage
+(16 matches) separately.
 
 ![Group stage average log loss.](/assets/posts/wc18-analysis/grp-bar.png)
 _Group stage average log loss. Lower is better._
 
 As we can see in the above plots, Kickoff.ai’s average log loss (0.925) is
-between Google’s one (0.933) and FiveThirtyEight’s (0.918). It also better than
+between Google’s (0.933) and FiveThirtyEight’s (0.918). It also better than
 the betting odds. Given the complexity of FiveThirtyEight's approach, the
 performance of our model is remarkable on the group stage.
 
@@ -125,7 +127,7 @@ Switzerland—where we were confident in a Swiss win (47%). Then, with the
 Uruguay's win with confidence (54%). On both matches, other models were more
 hesitating or wrong.
 
-It also interesting to observe how closely Google performance follows the
+It is also interesting to observe how closely Google performance follows the
 betting odds. So close that it is legitimate to ask whether their model is not
 actually solely based on betting odds...
 
@@ -179,7 +181,7 @@ We are planning to release our predictions for **club matches** from European
 major leagues. We will continue tracking our performances and try to refine our
 model based the knowledge we gain.
 
-Stay tuned!
+Stay tuned by [subscribing to our mailing list!][mailchimp]!
 
 #### Prediction data
 
@@ -192,8 +194,11 @@ You can find the prediction data we used to evaluate the different models
 
 [final]: http://kickoff.ai/match/20236
 [korger]: http://kickoff.ai/match/19067
+[kai-france]: https://kickoff.ai/team/231
+[quora-logloss]: https://www.quora.com/What-is-an-intuitive-explanation-for-the-log-loss-function
 [538]: https://projects.fivethirtyeight.com/2018-world-cup-predictions/
 [538method]:https://fivethirtyeight.com/features/how-our-2018-world-cup-predictions-work/
 [betting-odds]:http://www.betexplorer.com/soccer/world/world-cup/results/?stage=OneVXSrp
 [teams]: http://kickoff.ai/teams
+[mailchimp]: http://eepurl.com/b5lQuP
 [email]: mailto:info@kickoff.ai
