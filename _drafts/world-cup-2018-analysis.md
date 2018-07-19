@@ -1,18 +1,17 @@
 ---
 layout: post
-title:  "A Surprising World Cup? Not so fast..."
+title:  "A Surprising World Cup? Not So Fast..."
 author: "Victor Kristof"
 ---
 
-*Bravo les Bleus!* According to our model, France had 6% chances of winning the
-competition. For the [final match][final], Kickoff.ai gave 47% chances of
-winning to France, 25% chances to Croatia, and 21% chances of a draw after 90
-minutes.  And with the Croatian outsiders reaching the final after an epic
-journey, many report that this year's edition was particularly surprising.
-We'll see however that, quantitatively, this World Cup has been easier to
-predict in comparison to previous editions.  We provide in this article an
-evaluation of our model's performance and compare it to Google's,
-[FiveThirtyEight][538]'s, and to predictions derived from betting odds.
+*Bravo les Bleus!* For the [final match][final], gave 47% chances of winning to
+France, 25% chances to Croatia, and 21% chances of a draw after 90 minutes. But
+with the Croatian outsiders reaching the final after an epic journey, many
+report that this year's edition was particularly surprising.  We'll see however
+that, quantitatively, this World Cup has been easier to predict in comparison to
+previous editions.  We provide in this article an evaluation of our model's
+performance and compare it to Google's, [FiveThirtyEight][538]'s, and to
+predictions derived from betting odds.
 
 ## Behind the scenes
 
@@ -191,14 +190,14 @@ Stay tuned by [subscribing to our mailing list!][mailchimp]!
 
 [Shoot us an email!][email]
 
-[final]: http://kickoff.ai/match/20236
-[korger]: http://kickoff.ai/match/19067
+[final]: https://kickoff.ai/match/20236
+[korger]: https://kickoff.ai/match/19067
 [kai-france]: https://kickoff.ai/team/231
 [quora-logloss]: https://www.quora.com/What-is-an-intuitive-explanation-for-the-log-loss-function
 [538]: https://projects.fivethirtyeight.com/2018-world-cup-predictions/
 [538method]:https://fivethirtyeight.com/features/how-our-2018-world-cup-predictions-work/
 [betting-odds]:http://www.betexplorer.com/soccer/world/world-cup/results/?stage=OneVXSrp
-[teams]: http://kickoff.ai/teams
+[teams]: https://kickoff.ai/teams
 [mailchimp]: http://eepurl.com/b5lQuP
 [email]: mailto:info@kickoff.ai
 [data]: /assets/data/wc2018-probabilities.csv
