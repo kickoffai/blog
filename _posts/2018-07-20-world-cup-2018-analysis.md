@@ -166,7 +166,7 @@ _Average log loss on previous World Cup editions. Lower is better._
 
 As you can see, our model's performances during World Cup 2018's edition are
 actually better than the previous two editions. This suggests that there were
-more surprise in 2010 and 2014 than this year.
+more surprises in 2010 and 2014 than this year.
 
 ## What’s next?
 
