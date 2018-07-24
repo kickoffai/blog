@@ -4,9 +4,9 @@ title:  "A Surprising World Cup? Not So Fast..."
 author: "Victor Kristof"
 ---
 
-*Bravo les Bleus!* For the [final match][final], gave 47% chances of winning to
-France, 25% chances to Croatia, and 21% chances of a draw after 90 minutes. But
-with the Croatian outsiders reaching the final after an epic journey, many
+*Bravo les Bleus!* For the [final match][final], we gave 47% chances of winning
+to France, 25% chances to Croatia, and 21% chances of a draw after 90 minutes.
+But with the Croatian outsiders reaching the final after an epic journey, many
 report that this year's edition was particularly surprising.  We'll see however
 that, quantitatively, this World Cup has been easier to predict in comparison to
 previous editions.  We provide in this article an evaluation of our model's
