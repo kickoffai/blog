@@ -1,0 +1,24 @@
+10Bet 		2.45 	3.15 	3.30
+12BET 		2.44 	3.15 	3.10
+188BET 		2.38 	3.20 	3.22
+1xBet 		2.42 	3.07 	3.36
+888sport 		2.33 	3.05 	3.35
+bet-at-home 		2.45 	3.00 	3.30
+bet365 		2.45 	3.10 	3.40
+Betclic 		2.45 	3.20 	3.40
+Betfair 		2.50 	3.10 	3.40
+Betsafe 		2.45 	3.10 	3.45
+Betsson 		2.45 	3.10 	3.45
+BetVictor 		2.38 	3.20 	3.40
+Betway 		2.40 	3.10 	3.40
+bwin 		2.40 	3.10 	3.40
+ComeOn 		2.45 	3.05 	3.35
+Interwetten 		2.40 	3.00 	3.40
+Paddy Power 		2.25 	2.88 	3.25
+Pinnacle 		2.49 	3.17 	3.30
+SBOBET 		2.42 	3.10 	3.15
+Sportingbet 		2.25 	2.85 	3.05
+Unibet 		2.40 	3.15 	3.45
+William Hill 		2.30 	3.10 	3.30
+youwin 		2.20 	2.80 	3.00
+Betfair Exchange 		2.41 	3.09 	3.38
