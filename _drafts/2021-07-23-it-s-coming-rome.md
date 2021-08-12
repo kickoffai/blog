@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "It's Coming...Rome"
+title: "It's Coming... Rome"
 author: 'Victor Kristof and Lucas Maystre'
 ---
 
@@ -13,8 +13,8 @@ But does it mean we made a mistake?
 ## How accurate are your predictions?
 
 One question we're often asked is "how accurate are your predictions?".
-Our answer is usually unsatisfactory, because our model, by design, makes errors.
-In fact, no predictive models of football matches, Kickscore included, will ever predict a win for [Czech Republic against the Netherlands][czechrepulic-netherlands], even though this was the outcome.
+Our answer is usually unsatisfactory, because our model, almost by design, is bound to make errors.
+Arguably, no sane predictive model of football matches, Kickscore included, will ever predict a win for [Czech Republic against the Netherlands][czechrepulic-netherlands], even though this was the outcome.
 
 Football is a sport with a [high level of randomness][wunderlich2021influence], in which one expects the unexpected!
 Yet, as shown in the plot below, Kickscore reaches an accuracy of 56.9%.
@@ -30,7 +30,7 @@ _Accuracy obtained by Kickoff.ai and some of the major bookmakers. Higher is bet
 Predicting the outcome of a match is a difficult task - and one that is perhaps not the most useful and interesting.
 Football is a game of skill and luck, influenced by many factors and in which a part of randomness is always present.
 To take this uncertainty into account, statistical modelers and sports analysts design models that predict the _probabilities_ of each outcome.
-A **probabilistic** model enables a more fine-grained analysis than a model that only predicts the outcome of a match (which is called a _deterministic_ model), and provides a measure of how expected (or not) an outcome was.
+A **probabilistic** model enables a more fine-grained analysis than a model that only predicts the outcome of a match, and provides a measure of how expected (or not) an outcome was.
 For example, probabilistic models, such as Kickscore, can be used for [scouting new talents][scouting], for [enriching media articles][media], for [detecting fraud][fraud], and for [setting betting odds][odds].
 
 However, even though probabilistic models provide many benefits, their major drawback lies in how to evaluate their predictions.
