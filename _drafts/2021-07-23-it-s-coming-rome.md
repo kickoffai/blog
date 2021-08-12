@@ -15,6 +15,7 @@ But does it mean we made a mistake?
 One question we're often asked is "how accurate are your predictions?".
 Our answer is usually unsatisfactory, because our model, by design, makes errors.
 In fact, no predictive models of football matches, Kickscore included, will ever predict a win for [Czech Republic against the Netherlands][czechrepulic-netherlands], even though this was the outcome.
+
 Football is a sport with a [high level of randomness][wunderlich2021influence], in which one expects the unexpected!
 Yet, as shown in the plot below, Kickscore reaches an accuracy of 56.9%.
 This is (fortunately) better than if we were predicting all matches at random, in which case our performance would be 33%.
@@ -43,8 +44,8 @@ But interpreting them in absolute terms are difficult, and we have to _compare_ 
 This is what we have done in our analysis of the [World Cup 2018][previous-blog], where we compared Kickscore against the predictions of Google, FiveThirtyEight, and the bookmakers.
 For the Euro 2020, unfortunately, we can compare our performance only to that of the bookmakers, because Google and FiveThirtyEight didn't provide predictions for this competition.
 
-We choose to use the log loss to evaluate our performance (for reasons that our out of the scope of this blog post).
-The log loss is a value contained between 0 (highly confident and correct prediction) and infinity (highly confident and wrong prediction).
+We choose to use the log loss to evaluate our performance (for reasons that are out of the scope of this blog post).
+The log loss is a value between 0 (highly confident and correct prediction) and infinity (highly confident and wrong prediction).
 Hence, a **lower** value is better.
 We show in the following figure the log loss for our model and for all bookmakers in our database.
 A random predictor that assigns a 33.33% probability to each outcome of each match reaches a log loss of 1.0986.
@@ -53,24 +54,80 @@ Kickoff.ai's model obtains 0.9650, and the best log loss among the bookmakers is
 ![Log loss obtained by Kickoff.ai and some of the major bookmakers.](/assets/posts/eu20-analysis/logloss.png)
 _Log loss obtained by Kickoff.ai and some of the major bookmakers. Lower is better._
 
-## We (fortunately don't) live in a simulation
+## We don't live in a simulation - or do we?
 
-Another way of evaluating our model is by simulating the whole tournament and compare our most likely winners to that of other models.
+A second way of evaluating our probabilistic model is by **simulating** the whole tournament (before it happens) to predict the most likely winners.
+The predictions are obtained by simulating many times, say a 100,000 times, the matches of the Euro until the final, and computing the proportion of times a team wins the (simulated) competition.
+Once the competition is over, we can compare the models' predictions with the true winner.
+We can then compare these predictions to that of other models.
 
-- This year, [Goldman Sachs has provided such predictions][goldman-sachs-report]: they predicted the Euro 2020 winner to be Belgium (21.7%), Portugal (11.6%), England (10.9%), France (10.5%), or Spain (10.2%).
-- They also provided the predictions of the winner obtained by the betting odds on Betfair: England (20%), France (16%), Belgium (13%), Spain (12.5%), or Germany/Italy (11%).
-- On our side, we obtain these predictions: England (17.1%), Italy (16.4%), Spain (12.1%), France (12%), and Belgium (9.4%)
+This year, [Goldman Sachs has provided such predictions][goldman-sachs-report] using their own probabilistic model.
+Their model is different from ours because they model the _number of goals scored by each team_, whereas we model _the outcome of a match_ directly.
+They could still simulate the Euro 2020 and they predicted the top-5 winners to be:
 
-[TODO: Show bar plot or table for winner prediction]
+1. Belgium (21.7%)
+2. Portugal (11.6%)
+3. England (10.9%)
+4. France (10.5%)
+5. Spain (10.2%)
+
+Goldman Sachs analysts also provided the predictions of the winner obtained by the betting odds on **Betfair**.
+In this case, they obtained:
+
+1. England (20%)
+2. France (16%)
+3. Belgium (13%)
+4. Spain (12.5%)
+5. Germany/Italy (11%).
+
+On our side, we obtained:
+
+1. England (17.1%)
+2. Italy (16.4%)
+3. Spain (12.1%)
+4. France (12%)
+5. Belgium (9.4%)
+
+We see that _Italy didn't have the highest probability of winning_ for neither of the three models.
+However, **Italy** had the **second highest probability** according to our model, and a probability less than one percentage point lower than that of England.
+**England**, on its parts, had the **highest chances** according to Betfair and to our model.
+Goldman Sachs predicted the highest probabilities of winning to **Belgium and Portugal**.
+Is it the influence of [José Manuel Barroso][barroso], the former _Prime Minister of Portugal_ who left his role as the _President of the European Commission_ in Brussels to become _chairman of Goldman Sachs_?
+Who knows.
 
 ## Will I become rich using Kickoff.ai's predictions?
 
-A third way of evaluating our predicted outcome probabilities is by playing against the betting odds and analyzing how much money we could have won (or lost...).
+A third way of evaluating our predicted outcome probabilities is by using them to (try to) **beat the betting odds**.
+Since we didn't (have the courage to) do that during the competition, we simulated what would have happened if we had.
+We follow the [Kelly strategy][kelly] and implement it as follows to play against 10 bookmakers:
 
-- To do so, we use the following strategy to play against 10 bookmakers:
-- [TODO: Describe strategy.]
+1. Start with some amount of money _M_
+2. Compute the expected gain for each outcome as _p(outcome)_ x _odd(outcome)_
+3. If there is a positive expected gain, bet _f_ x _M_ on _outcome_, where _f_ is _expected_gain(outcome) / [odd(outcome) - 1]_ (this is the **Kelly criterion**)
 
-[TODO: Show plot of money won/lost during the Euro.]
+We show in the plot below the evolution of our money when starting with _M = \$100_.
+Our cash raised up to $276, but then decreased until $107, meaning that we would have made $7 if we started with an initial capital of $100 and followed this strategy.
+The matches [Denmark--Finland][denfin] and [Poland--Slovakia][polslo] would have given us the highest return, with a return of $50 by betting $6 on a win of Finland and \$11 on a win by Slovakia, respectively.
+It is not clear why our money started to decrease after the match between Denmark and Belgium, but the knockout stage seemed to have been more difficult to predict - [similarly to what we observed for the World Cup 2018][knockout].
+
+![Simulation of betting using the Kelly strategy.](/assets/posts/eu20-analysis/betting.png)
+_Simulation of betting using the Kelly strategy._
+
+## Conclusion
+
+Despite all the complications due to the pandemics, it was **a lot of fun** to follow the Euro 2020!
+So many surprises, deceptions, goals, and emotions.
+And football came...to _Rome_!
+We are happy with how our model performed, since it performed better than that of the betting odds.
+It was also more accurate than the Goldman Sachs's model at predicting the winner of the Euro.
+However, we would not have become rich by using our predictions for betting -- this time at least!
+
+Modeling football matches is **as much an art as it is science**.
+The possibilities are virtually infinite, and we have many ideas on how to improve our predictions.
+If you are interested in playing with our model as well, the code is [publicly available on GitHub][code].
+We also have [published an academic paper][paper] describing the mechanics of Kickscore.
+
+Don't hesitate to reach out to us if you have questions and to share your findings!
 
 [final]: http://kickoff.ai/match/72811
 [czechrepulic-netherlands]: http://kickoff.ai/match/72799
@@ -83,3 +140,11 @@ A third way of evaluating our predicted outcome probabilities is by playing agai
 [odds]: https://tradematesports.medium.com/how-bookmakers-create-their-odds-from-a-former-odds-compiler-5b36b4937439
 [brier]: https://en.wikipedia.org/wiki/Brier_score
 [logloss]: https://en.wikipedia.org/wiki/Cross_entropy
+[barroso]: https://en.wikipedia.org/wiki/José_Manuel_Barroso
+[kelly]: https://en.wikipedia.org/wiki/Kelly_criterion
+[knockout]: https://blog.kickoff.ai/2018-07-20/world-cup-2018-analysis#how-well-did-our-model-perform
+[denfin]: http://kickoff.ai/match/72775
+[polslo]: http://kickoff.ai/match/72767
+[code]: https://github.com/lucasmaystre/kickscore
+[paper]: https://arxiv.org/abs/1903.07746
+[email]: mailto:info@kickoff.ai
