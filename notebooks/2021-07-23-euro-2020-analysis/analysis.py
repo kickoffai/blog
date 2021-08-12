@@ -110,7 +110,10 @@ def report_logloss(losses):
 
 def plot_accuracy(accuracies):
 
-    plt.figure(figsize=(8, 6))
+    factor = 0.75
+    width = 6.4 * factor
+    height = 4.8 * factor
+    plt.figure(figsize=(width, height))
 
     labels, values, colors = ['Random'], [33], ['gray']
     for i, (model, accuracy) in enumerate(accuracies.items()):
@@ -120,13 +123,18 @@ def plot_accuracy(accuracies):
 
     plt.bar(labels, values, color=colors)
     plt.ylabel('Accuracy [%]')
-    plt.show()
-    plt.savefig('../../assets/eu20-analysis/accuracy.png')
+    plt.xticks(rotation=45)
+    # plt.show()
+    plt.tight_layout()
+    plt.savefig('../../assets/posts/eu20-analysis/accuracy.png')
 
 
 def plot_logloss(losses):
 
-    plt.figure(figsize=(8, 6))
+    factor = 0.75
+    width = 6.4 * factor
+    height = 4.8 * factor
+    plt.figure(figsize=(width, height))
 
     labels, values, colors = ['Random'], [-np.log(1 / 3)], ['gray']
     for i, (model, logloss) in enumerate(losses.items()):
@@ -136,8 +144,10 @@ def plot_logloss(losses):
 
     plt.bar(labels, values, color=colors)
     plt.ylabel('Log loss')
-    plt.show()
-    plt.savefig('../../assets/eu20-analysis/logloss.png')
+    plt.xticks(rotation=45)
+    # plt.show()
+    plt.tight_layout()
+    plt.savefig('../../assets/posts/eu20-analysis/logloss.png')
 
 
 def main():
